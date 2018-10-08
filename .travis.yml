@@ -15,3 +15,4 @@ matrix:
     - jdk: openjdk11
     - jdk: openjdk-ea
 
+script: "mvn clean install -DskipTests"

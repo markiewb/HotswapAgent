@@ -6,8 +6,6 @@ dist: trusty
 before_install:
   - unset _JAVA_OPTIONS
 
-install: echo "The default Travis install script is being skipped!"
-
 matrix:
   include:
     - jdk: openjdk7
@@ -17,5 +15,3 @@ matrix:
     - jdk: openjdk11
     - jdk: openjdk-ea
 
-script:
-  - ./mvnw clean install 

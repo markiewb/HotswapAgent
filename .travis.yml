@@ -11,9 +11,9 @@ jobs:
     jdk: openjdk8
     script: mvn clean verify
   - jdk: openjdk10
-    script: mvn -q verify
+    script: mvn clean verify
   - jdk: openjdk11
-    script: mvn -q verify
+    script: mvn clean verify
     
   - stage: build  
     jdk: openjdk11

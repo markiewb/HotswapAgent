@@ -1,11 +1,27 @@
 sudo: false
 language: java
-notifications:
-  email:
-    - lada.dvorak7@gmail.com
+#notifications:
+#  email:
+#    - lada.dvorak7@gmail.com
     
-jdk:
-  - openjdk11
+jobs:
+  include:
+  # Check JDK 8,10,...
+  - stage: test
+    jdk: openjdk8
+    script: mvn clean verify -DskipTests
+  - jdk: oraclejdk8
+    script: mvn clean verify -DskipTests
+  - jdk: openjdk10
+    script: mvn clean verify -DskipTests
+  - jdk: openjdk11
+    script: mvn clean verify -DskipTests
+  - jdk: oraclejdk11
+    script: mvn clean verify -DskipTests
+    
+  - stage: build  
+    jdk: openjdk11
+    script: "mvn clean install -DskipTests"
 
 env:
 
@@ -18,7 +34,6 @@ env:
     - secure: "aXfkaGzi80Uaa93pCnhIw5xMjaBhL9k5ArOZwgeKeK5mey1Tt5ttump8LuP/kb7rToauzUr8Su6YeaMZgFhUf+oZNOZ8giq4OO+qsnXAudLROMGEYrPnbC03YalCcsThDRQua6//U3Z3abG0TSS227peQaGgFJn26itRuoZd5WalWXOfCWaxrSCljmEHNJui1UnNwRFYKETw/QdsCbd2C0SO0nT/85hxKy50RwujDbgHMfZsW6o5YpAZbkUchYtON1vkCNc2G1sH4EPLci5zsgPDn6THoznqXBc4byOUtYHPPA2852TW52YtzhUgwyNxP42mJGGlgoH+3Df6FnK+8jLDLpHQAHpJeqndB67bO6KzyWuO8YLsAzHbnWJUbOIJxrb2/pBsn3z8ImM9NQMNuShJXbatNw5iIdr+/+RQiBUsNwPsAJJ42iybjufLouC+xJL+zmDnLygFmy2Y6O3uR6oRa3E+rQscWdKvOplpKgf6hPjoy44y147IJzHDbHUCnBHt8vg2Vy7zT+pM+Uvb4kESwl0NDbEDE3X3tWT7JeRZmF2GWOsSnPK8XDr/EO0QlNFwJ+SN6CYYPME8CxnD0iSO90CThiquHpT4GfvIep88UMTbu3WbmqYA2XKvPzaCWZrgZQ9q1TumYNtqHfVdRX8HcPm+o2VK0+7RBOJ1ciA="
    
 
-script: "mvn clean install -DskipTests"
 deploy:
   - provider: script
     script: ./.travis.deploy.sh
